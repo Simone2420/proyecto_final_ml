@@ -1,0 +1,101 @@
+# Entornos virtuales de Python
+.venv/
+venv/
+env/
+ENV/
+
+# Archivos generados por Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Entornos y herramientas
+.env
+.env.*
+!.env.example
+.python-version
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# NumPy, pandas y datos temporales
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.joblib
+*.parquet
+*.feather
+*.h5
+*.hdf5
+
+# TensorFlow / Keras
+checkpoints/
+!checkpoints/.gitkeep
+*.ckpt
+*.ckpt.*
+*.pb
+*.tflite
+saved_model/
+logs/
+log_dir/
+TensorBoard/
+
+# Modelos y artefactos de entrenamiento
+models/
+artifacts/
+runs/
+wandb/
+mlruns/
+*.onnx
+
+
+
+# Archivos de IDE y sistema
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Logs y temporales
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+.directory
