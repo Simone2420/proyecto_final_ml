@@ -97,6 +97,9 @@ Thumbs.db
 *.bak
 *.swp
 *~
+*.png
+metricas_clasico.json
+datos/
 
 .directory
 .ai
