@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taller Final Integrador de Machine Learning — Sustentación</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===========================================
+       VIEWPORT FITTING: MANDATORY BASE STYLES
+       =========================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+      background-color: #F7F5F0;
+      color: #14181F;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    html {
+      scroll-snap-type: y mandatory;
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: radial-gradient(circle at 90% 10%, rgba(200, 75, 49, 0.06), transparent 45%),
+                  radial-gradient(circle at 10% 90%, rgba(30, 86, 49, 0.05), transparent 45%),
+                  #F7F5F0;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-height: 100%;
+      overflow: hidden;
+      padding: var(--slide-padding);
+      max-width: min(92vw, 1140px);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    :root {
+      --title-size: clamp(1.8rem, 4.4vw, 3.5rem);
+      --h2-size: clamp(1.35rem, 3vw, 2.25rem);
+      --h3-size: clamp(0.95rem, 1.8vw, 1.35rem);
+      --body-size: clamp(0.8rem, 1.35vw, 1.05rem);
+      --small-size: clamp(0.68rem, 1vw, 0.85rem);
+      --slide-padding: clamp(1.5rem, 4vw, 3.5rem);
+      --content-gap: clamp(0.75rem, 1.8vw, 1.5rem);
+      --element-gap: clamp(0.4rem, 1vw, 0.85rem);
+
+      --ink: #14181F;
+      --muted: #555E6B;
+      --accent: #C84B31;
+      --forest: #1E5631;
+      --surface: #FFFFFF;
+      --border: #E2DDD5;
+    }
+
+    @media (max-height: 700px) {
+      :root {
+        --slide-padding: clamp(1rem, 3vw, 2rem);
+        --content-gap: clamp(0.5rem, 1.4vw, 1rem);
+        --title-size: clamp(1.5rem, 4vw, 2.6rem);
+        --h2-size: clamp(1.15rem, 2.8vw, 1.8rem);
+      }
+    }
+
+    @media (max-height: 600px) {
+      :root {
+        --slide-padding: clamp(0.75rem, 2.5vw, 1.5rem);
+        --body-size: clamp(0.72rem, 1.2vw, 0.92rem);
+      }
+      .nav-dots, .keyboard-hint { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ===========================================
+       TYPOGRAPHY & LAYOUT COMPONENTS
+       =========================================== */
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--small-size);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: clamp(0.35rem, 0.8vh, 0.65rem);
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: var(--title-size);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: var(--content-gap);
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: var(--h2-size);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: var(--content-gap);
+    }
+
+    h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: var(--h3-size);
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+
+    p, li {
+      font-size: var(--body-size);
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .lead {
+      font-size: clamp(0.95rem, 1.6vw, 1.25rem);
+      color: #2B3340;
+      line-height: 1.45;
+      max-width: 78ch;
+    }
+
+    .quote-box {
+      background: var(--surface);
+      border-left: 4px solid var(--accent);
+      padding: clamp(0.85rem, 1.8vw, 1.35rem) clamp(1rem, 2vw, 1.6rem);
+      border-radius: 0 10px 10px 0;
+      box-shadow: 0 4px 18px rgba(20, 24, 31, 0.04);
+      margin: var(--content-gap) 0;
+    }
+
+    .quote-box p {
+      color: var(--ink);
+      font-weight: 500;
+      font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--content-gap);
+      align-items: stretch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--content-gap);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--element-gap);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: clamp(0.9rem, 1.8vw, 1.4rem);
+      box-shadow: 0 4px 16px rgba(20, 24, 31, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .card-accent {
+      border-top: 4px solid var(--accent);
+    }
+
+    .card-forest {
+      border-top: 4px solid var(--forest);
+    }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: var(--small-size);
+      color: var(--muted);
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.45rem, 1vh, 0.8rem);
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      color: #2B3340;
+    }
+
+    .bullet-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    code, .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      background: #ECE8DF;
+      color: #14181F;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+    }
+
+    .terminal-box {
+      background: #14181F;
+      color: #E8E6E1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+      padding: clamp(0.85rem, 1.8vw, 1.3rem);
+      border-radius: 10px;
+      line-height: 1.55;
+      border: 1px solid #2A313D;
+    }
+
+    .terminal-box .prompt { color: #7EE787; }
+    .terminal-box .comment { color: #8B949E; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      font-size: var(--body-size);
+    }
+
+    th, td {
+      padding: clamp(0.55rem, 1.1vw, 0.9rem) clamp(0.75rem, 1.4vw, 1.1rem);
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: #14181F;
+      color: #FFFFFF;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: var(--small-size);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    .winner { color: var(--forest); font-weight: 700; }
+    .badge {
+      display: inline-block;
+      padding: 0.2em 0.6em;
+      border-radius: 999px;
+      font-size: var(--small-size);
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .badge-forest { background: rgba(30, 86, 49, 0.12); color: var(--forest); }
+    .badge-accent { background: rgba(200, 75, 49, 0.12); color: var(--accent); }
+
+    .slide-footer {
+      position: absolute;
+      bottom: clamp(0.75rem, 2vh, 1.25rem);
+      left: var(--slide-padding);
+      right: var(--slide-padding);
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--small-size);
+      color: #7A828E;
+      pointer-events: none;
+    }
+
+    .nav-dots {
+      position: fixed;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      z-index: 50;
+    }
+
+    .nav-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #C9C3B8;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+      border: none;
+    }
+
+    .nav-dot.active {
+      background: var(--accent);
+      transform: scale(1.35);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { animation: fadeUp 0.5s ease-out both; }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación lateral -->
+  <nav class="nav-dots" aria-label="Navegación de diapositivas">
+    <button class="nav-dot active" onclick="goToSlide(0)" title="Portada"></button>
+    <button class="nav-dot" onclick="goToSlide(1)" title="Contexto y Dataset"></button>
+    <button class="nav-dot" onclick="goToSlide(2)" title="Preprocesamiento"></button>
+    <button class="nav-dot" onclick="goToSlide(3)" title="Modelos"></button>
+    <button class="nav-dot" onclick="goToSlide(4)" title="Resultados"></button>
+    <button class="nav-dot" onclick="goToSlide(5)" title="Análisis Técnico"></button>
+    <button class="nav-dot" onclick="goToSlide(6)" title="Conclusión y Demo"></button>
+  </nav>
+
+  <!-- SLIDE 1: PORTADA -->
+  <section class="slide" id="slide-0">
+    <div class="slide-content reveal">
+      <div class="eyebrow">Taller Final Integrador de Machine Learning — Grupo 602</div>
+      <h1>Predicción de Categoría de Producto en Retail</h1>
+      <p class="lead">Comparativa de pipeline modular entre Scikit-Learn (Árbol de Decisión) y TensorFlow/Keras (Red Neuronal Secuencial).</p>
+      <div class="quote-box">
+        <p>“¿Qué categoría de producto (<strong>Clothing</strong>, <strong>Footwear</strong>, <strong>Accessories</strong>, <strong>Outerwear</strong>) comprará un cliente según su perfil y temporada?”</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="stat-label">Integrantes</div>
+          <div style="font-weight:700; color:var(--ink); font-size: var(--small-size); line-height:1.4;">Blass Simón Muñoz Monterrosa<br/>Yoiner Stiven Llanos Moncada</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Dataset &amp; Enfoque</div>
+          <div style="font-weight:700; color:var(--ink); font-size: var(--small-size); line-height:1.4;">Customer Shopping Trends<br/>Clasificación Multiclase (4)</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Entrega</div>
+          <div style="font-weight:700; color:var(--ink); font-size: var(--small-size); line-height:1.4;">25 de noviembre de 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>proyecto_final_ml</span>
+      <span>01 / 07</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: CONTEXTO DEL NEGOCIO Y DATASET -->
+  <section class="slide" id="slide-1">
+    <div class="slide-content">
+      <div class="eyebrow">01 · Contexto del Negocio y Dataset</div>
+      <h2>Customer Shopping Trends (Kaggle)</h2>
+      <div class="grid-4" style="margin-bottom: var(--content-gap);">
+        <div class="card">
+          <div class="stat-num">3,900</div>
+          <div class="stat-label">Registros totales</div>
+        </div>
+        <div class="card">
+          <div class="stat-num">14</div>
+          <div class="stat-label">Variables de entrada</div>
+        </div>
+        <div class="card">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Clases en Category</div>
+        </div>
+        <div class="card">
+          <div class="stat-num">3.49%</div>
+          <div class="stat-label">Nulos controlados</div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card card-accent">
+          <h3>Variables Predictoras (Mixtas)</h3>
+          <ul class="bullet-list">
+            <li><strong>Numéricas:</strong> <code>Age</code>, <code>Purchase Amount (USD)</code>, <code>Review Rating</code>, <code>Previous Purchases</code>.</li>
+            <li><strong>Categóricas (string):</strong> <code>Gender</code>, <code>Location</code>, <code>Size</code>, <code>Color</code>, <code>Season</code>, <code>Payment Method</code>, <code>Shipping Type</code>, <code>Subscription Status</code>.</li>
+          </ul>
+        </div>
+        <div class="card card-forest">
+          <h3>Variable Objetivo: <code>Category</code></h3>
+          <ul class="bullet-list">
+            <li><strong>Clothing:</strong> 1,737 registros (44.5%)</li>
+            <li><strong>Accessories:</strong> 1,240 registros (31.8%)</li>
+            <li><strong>Footwear:</strong> 599 registros (15.4%)</li>
+            <li><strong>Outerwear:</strong> 324 registros (8.3%)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>data/shopping_trends.csv</span>
+      <span>02 / 07</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: DECISIONES DE PREPROCESAMIENTO -->
+  <section class="slide" id="slide-2">
+    <div class="slide-content">
+      <div class="eyebrow">02 · Script 1: 1_preprocesamiento.py</div>
+      <h2>Decisiones Clave de Preprocesamiento</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Limpieza e Imputación</h3>
+          <ul class="bullet-list">
+            <li>Se excluyó <code>Customer ID</code> e <code>Item Purchased</code> para evitar fuga de datos (<em>data leakage</em>).</li>
+            <li>Inyección controlada de <strong>3.49% de nulos</strong> (semilla <code>412</code>) en 8 columnas clave.</li>
+            <li><code>SimpleImputer</code>: <strong>mediana</strong> para numéricas y <strong>moda</strong> para categóricas.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Transformación y División</h3>
+          <ul class="bullet-list">
+            <li><code>OneHotEncoder</code> sobre variables de texto → generó <strong>112 columnas</strong> finales.</li>
+            <li><code>StandardScaler</code> sobre variables numéricas para igualar escalas.</li>
+            <li><code>train_test_split</code> 80/20 estratificado (<code>random_state=412</code>): <strong>3,120 Train / 780 Test</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>1_preprocesamiento.py</span>
+      <span>03 / 07</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: MODELOS IMPLEMENTADOS -->
+  <section class="slide" id="slide-3">
+    <div class="slide-content">
+      <div class="eyebrow">03 · Scripts 2 y 3: Modelado Supervisado</div>
+      <h2>Scikit-Learn vs. TensorFlow / Keras</h2>
+      <div class="grid-2">
+        <div class="card card-forest">
+          <h3>Modelo Clásico (<code>2_modelo_clasico.py</code>)</h3>
+          <ul class="bullet-list">
+            <li>Algoritmo: <strong>Árbol de Decisión</strong> (<code>DecisionTreeClassifier</code>).</li>
+            <li>Ventaja: Maneja datos tabulares mixtos sin requerir gran volumen de ejemplos.</li>
+            <li>Interpretabilidad directa de reglas de decisión por producto.</li>
+            <li>Serializado en <code>modelo_clasico.joblib</code>.</li>
+          </ul>
+        </div>
+        <div class="card card-accent">
+          <h3>Red Neuronal (<code>3_red_neuronal.py</code>)</h3>
+          <ul class="bullet-list">
+            <li>Arquitectura <code>Sequential</code>: <code>Input(112)</code> → <code>Dense(64, ReLU)</code> → <code>Dense(32, ReLU)</code> → <code>Dense(4, Softmax)</code>.</li>
+            <li>Optimizador: <code>adam</code> | Pérdida: <code>sparse_categorical_crossentropy</code>.</li>
+            <li>Entrenamiento: 30 épocas, <code>batch_size=32</code>, <code>validation_split=0.2</code>.</li>
+            <li>Serializado en <code>modelo_red_neuronal.keras</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>2_modelo_clasico.py &amp; 3_red_neuronal.py</span>
+      <span>04 / 07</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: COMPARACIÓN DE RESULTADOS -->
+  <section class="slide" id="slide-4">
+    <div class="slide-content">
+      <div class="eyebrow">04 · Script 4: 4_comparacion.py</div>
+      <h2>Resultados Comparativos (780 Muestras Test)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Métrica</th>
+            <th>Árbol de Decisión (Scikit-Learn)</th>
+            <th>Red Neuronal (TensorFlow)</th>
+            <th>Mejor Modelo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Accuracy</strong></td>
+            <td class="winner">0.4346 (43.46%)</td>
+            <td>0.3500 (35.00%)</td>
+            <td><span class="badge badge-forest">Árbol de Decisión</span></td>
+          </tr>
+          <tr>
+            <td><strong>Precision</strong></td>
+            <td>0.3135 (31.35%)</td>
+            <td class="winner">0.3265 (32.65%)</td>
+            <td><span class="badge badge-accent">Red Neuronal</span></td>
+          </tr>
+          <tr>
+            <td><strong>Recall</strong></td>
+            <td class="winner">0.4346 (43.46%)</td>
+            <td>0.3500 (35.00%)</td>
+            <td><span class="badge badge-forest">Árbol de Decisión</span></td>
+          </tr>
+          <tr>
+            <td><strong>F1-Score</strong></td>
+            <td>0.3125 (31.25%)</td>
+            <td class="winner">0.3372 (33.72%)</td>
+            <td><span class="badge badge-accent">Red Neuronal</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top: var(--content-gap); font-size: var(--small-size);">
+        Nota: En un problema de 4 clases, el azar puro equivale a 25.00% de Accuracy. Ambos modelos superan la línea base aleatoria.
+      </p>
+    </div>
+    <div class="slide-footer">
+      <span>4_comparacion.py</span>
+      <span>05 / 07</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: ANÁLISIS TÉCNICO Y OVERFITTING -->
+  <section class="slide" id="slide-5">
+    <div class="slide-content">
+      <div class="eyebrow">05 · Análisis Técnico de Métricas</div>
+      <h2>¿Por qué ganó el Árbol de Decisión?</h2>
+      <div class="grid-2">
+        <div class="card card-accent">
+          <h3>Sobreajuste en la Red Neuronal</h3>
+          <ul class="bullet-list">
+            <li>En entrenamiento alcanzó <strong>89.10%</strong> de Accuracy, pero cayó a <strong>35.00%</strong> en prueba (<code>Loss: 2.0561</code>).</li>
+            <li>Causa: Alta dimensionalidad tras One-Hot Encoding (<strong>112 columnas</strong>, principalmente por 50 estados en <code>Location</code>) con solo 3,120 filas de entrenamiento.</li>
+          </ul>
+        </div>
+        <div class="card card-forest">
+          <h3>Estabilidad del Modelo Clásico</h3>
+          <ul class="bullet-list">
+            <li>El Árbol de Decisión generalizó mejor (<strong>43.46%</strong> Accuracy y Recall) sin memorizar ruido.</li>
+            <li>La variabilidad natural del comportamiento de compra explica el techo de precisión en datos demográficos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Análisis de Desempeño</span>
+      <span>06 / 07</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: CONCLUSIÓN Y DEMO EN VIVO -->
+  <section class="slide" id="slide-6">
+    <div class="slide-content">
+      <div class="eyebrow">06 · Conclusión Técnica y Demostración</div>
+      <h2>Conclusión y Ejecución en Vivo</h2>
+      <div class="quote-box" style="border-left-color: var(--forest);">
+        <p>Para este problema tabular de retail, el <strong>Árbol de Decisión (Scikit-Learn)</strong> es la opción más eficiente, estable e interpretable frente a la Red Neuronal.</p>
+      </div>
+      <div class="terminal-box">
+        <div><span class="comment"># Ejecución en vivo desde la terminal del proyecto</span></div>
+        <div><span class="prompt">$</span> .venv/bin/python 4_comparacion.py</div>
+        <div style="color:#9CA3AF; margin-top:0.35rem;">→ Carga X_test.csv (780 muestras) | Evalúa ambos modelos | Imprime tabla comparativa</div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Sustentación Oral — Fin</span>
+      <span>07 / 07</span>
+    </div>
+  </section>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.nav-dot');
+
+    function goToSlide(index) {
+      if (index < 0 || index >= slides.length) return;
+      slides[index].scrollIntoView({ behavior: 'smooth' });
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('export')) {
+      const targetIdx = parseInt(params.get('export'), 10);
+      slides.forEach((s, i) => { if (i !== targetIdx) s.style.display = 'none'; });
+      document.querySelector('.nav-dots').style.display = 'none';
+    } else if (window.location.hash && window.location.hash.startsWith('#slide-')) {
+      const target = document.querySelector(window.location.hash);
+      if (target) target.scrollIntoView({ behavior: 'instant' });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = Array.from(slides).indexOf(entry.target);
+          dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+      });
+    }, { threshold: 0.6 });
+
+    slides.forEach((s) => observer.observe(s));
+
+    document.addEventListener('keydown', (e) => {
+      const current = Array.from(dots).findIndex((d) => d.classList.contains('active'));
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        goToSlide(current + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToSlide(current - 1);
+      }
+    });
+  </script>
+</body>
+</html>
