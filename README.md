@@ -1,8 +1,8 @@
 # Taller Final Integrador de Machine Learning - Curso 601 / 602
 
 ## 🎯 Pregunta de Negocio y Formulación del Problema
-> **Pregunta Central de Negocio:**  
-> *«¿Qué categoría de producto (`Clothing`, `Footwear`, `Accessories`, `Outerwear`) comprará un cliente según su perfil demográfico, hábitos de compra y temporada?»*
+> ### **Pregunta Central:**
+> **¿Qué categoría de producto (Clothing, Footwear, Accessories, Outerwear) comprará un cliente según su perfil y temporada?**
 
 ### 💡 Justificación e Impacto de Negocio
 - **Segmentación y Personalización:** Anticipar qué tipo de artículo busca un consumidor para recomendar ofertas personalizadas en tiendas físicas o e-commerce.
