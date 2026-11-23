@@ -1,10 +1,19 @@
 # Taller Final Integrador de Machine Learning - Curso 601 / 602
 
-## 🎯 Pregunta de Negocio y Formulación del Problema
-> ### **Pregunta Central:**
-> **¿Qué categoría de producto (Clothing, Footwear, Accessories, Outerwear) comprará un cliente según su perfil y temporada?**
+## 🎯 Preguntas de Negocio y Formulación del Problema
 
-### 💡 Justificación e Impacto de Negocio
+### 1. Pregunta Central (General y Estacionalidad)
+> **¿Qué categoría de producto (`Clothing`, `Footwear`, `Accessories`, `Outerwear`) comprará un cliente según su perfil y temporada?**
+
+### 2. Segunda Pregunta de Negocio (Comportamiento y Sensibilidad al Valor)
+> **¿Existe una correlación directa entre el monto de compra (`Purchase Amount USD`), la frecuencia de compra (`Weekly`, `Bi-Weekly`, `Quarterly`) y la adquisición de accesorios frente a ropa (`Accessories` vs `Clothing`)?**
+
+#### 📌 Respuesta y Hallazgos a la Segunda Pregunta:
+- **Evidencia en los Datos:** No existe una correlación lineal directa o aislada, ya que el gasto promedio es casi idéntico en todas las categorías (~$60 USD en Accesorios y Ropa).
+- **Descubrimiento del Modelo:** El Árbol de Decisión identificó una relación no lineal multivariada donde el monto de compra aporta el **10.24% de la importancia** y la frecuencia semanal el **6.05%**, interactuando con la satisfacción (`Review Rating` 18.36%) y la edad para diferenciar compras recurrentes de impulso en accesorios frente a compras planificadas de vestuario.
+- **Estrategia Comercial:** Enfocar campañas de venta cruzada (*cross-selling*) de accesorios en clientes de visita semanal/quincenal, y reservar las campañas estacionales de vestuario para clientes con frecuencia trimestral o anual.
+
+### 💡 Justificación e Impacto General de Negocio
 - **Segmentación y Personalización:** Anticipar qué tipo de artículo busca un consumidor para recomendar ofertas personalizadas en tiendas físicas o e-commerce.
 - **Gestión Inteligente de Inventario:** Optimizar el stock estacional por tienda y región según las tendencias de consumo observadas en cada temporada.
 - **Eficiencia en Marketing:** Maximizar el retorno de inversión publicitaria (ROI) enviando promociones de las categorías con mayor probabilidad de conversión por cliente.
