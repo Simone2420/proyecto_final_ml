@@ -349,12 +349,13 @@
   <!-- Navegación lateral -->
   <nav class="nav-dots" aria-label="Navegación de diapositivas">
     <button class="nav-dot active" onclick="goToSlide(0)" title="Portada"></button>
-    <button class="nav-dot" onclick="goToSlide(1)" title="Contexto y Dataset"></button>
-    <button class="nav-dot" onclick="goToSlide(2)" title="Preprocesamiento"></button>
-    <button class="nav-dot" onclick="goToSlide(3)" title="Modelos"></button>
-    <button class="nav-dot" onclick="goToSlide(4)" title="Resultados"></button>
-    <button class="nav-dot" onclick="goToSlide(5)" title="Análisis Técnico"></button>
-    <button class="nav-dot" onclick="goToSlide(6)" title="Conclusión y Demo"></button>
+    <button class="nav-dot" onclick="goToSlide(1)" title="Preguntas de Negocio"></button>
+    <button class="nav-dot" onclick="goToSlide(2)" title="Contexto y Dataset"></button>
+    <button class="nav-dot" onclick="goToSlide(3)" title="Preprocesamiento"></button>
+    <button class="nav-dot" onclick="goToSlide(4)" title="Modelos"></button>
+    <button class="nav-dot" onclick="goToSlide(5)" title="Resultados"></button>
+    <button class="nav-dot" onclick="goToSlide(6)" title="Análisis Técnico"></button>
+    <button class="nav-dot" onclick="goToSlide(7)" title="Conclusión y Demo"></button>
   </nav>
 
   <!-- SLIDE 1: PORTADA -->
@@ -383,12 +384,47 @@
     </div>
     <div class="slide-footer">
       <span>proyecto_final_ml</span>
-      <span>01 / 07</span>
+      <span>01 / 08</span>
     </div>
   </section>
 
-  <!-- SLIDE 2: CONTEXTO DEL NEGOCIO Y DATASET -->
+  <!-- SLIDE 2: PREGUNTAS DE NEGOCIO Y HALLAZGOS -->
   <section class="slide" id="slide-1">
+    <div class="slide-content">
+      <div class="eyebrow">01 · Formulación del Problema y Hallazgos</div>
+      <h2>Preguntas de Negocio</h2>
+      <div class="grid-2">
+        <div class="card card-accent">
+          <h3>1. Pregunta Central (Estacionalidad)</h3>
+          <p style="color:var(--ink); font-weight:500; margin-bottom:0.6rem;">
+            “¿Qué categoría de producto (<code>Clothing</code>, <code>Footwear</code>, <code>Accessories</code>, <code>Outerwear</code>) comprará un cliente según su perfil y temporada?”
+          </p>
+          <ul class="bullet-list">
+            <li>Personalizar ofertas en tienda física y e-commerce.</li>
+            <li>Optimizar inventario estacional por región.</li>
+          </ul>
+        </div>
+        <div class="card card-forest">
+          <h3>2. Sensibilidad al Valor y Frecuencia</h3>
+          <p style="color:var(--ink); font-weight:500; margin-bottom:0.6rem;">
+            “¿Existe correlación entre monto (<code>USD</code>), frecuencia de compra y adquirir <code>Accessories</code> vs. <code>Clothing</code>?”
+          </p>
+          <ul class="bullet-list">
+            <li>Gasto promedio idéntico (~$60 USD): sin correlación lineal aislada.</li>
+            <li>Relación no lineal: <code>Review Rating</code> (18.36%), <code>Purchase Amount</code> (10.24%) y frecuencia semanal (6.05%).</li>
+            <li>Estrategia: <em>cross-selling</em> de accesorios en visitas frecuentes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>README.md — Preguntas de Negocio</span>
+      <span>02 / 08</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: CONTEXTO DEL NEGOCIO Y DATASET -->
+  <section class="slide" id="slide-2">
     <div class="slide-content">
       <div class="eyebrow">01 · Contexto del Negocio y Dataset</div>
       <h2>Customer Shopping Trends (Kaggle)</h2>
@@ -431,12 +467,12 @@
     </div>
     <div class="slide-footer">
       <span>data/shopping_trends.csv</span>
-      <span>02 / 07</span>
+      <span>03 / 08</span>
     </div>
   </section>
 
-  <!-- SLIDE 3: DECISIONES DE PREPROCESAMIENTO -->
-  <section class="slide" id="slide-2">
+  <!-- SLIDE 4: DECISIONES DE PREPROCESAMIENTO -->
+  <section class="slide" id="slide-3">
     <div class="slide-content">
       <div class="eyebrow">02 · Script 1: 1_preprocesamiento.py</div>
       <h2>Decisiones Clave de Preprocesamiento</h2>
@@ -461,12 +497,12 @@
     </div>
     <div class="slide-footer">
       <span>1_preprocesamiento.py</span>
-      <span>03 / 07</span>
+      <span>04 / 08</span>
     </div>
   </section>
 
-  <!-- SLIDE 4: MODELOS IMPLEMENTADOS -->
-  <section class="slide" id="slide-3">
+  <!-- SLIDE 5: MODELOS IMPLEMENTADOS -->
+  <section class="slide" id="slide-4">
     <div class="slide-content">
       <div class="eyebrow">03 · Scripts 2 y 3: Modelado Supervisado</div>
       <h2>Scikit-Learn vs. TensorFlow / Keras</h2>
@@ -474,9 +510,9 @@
         <div class="card card-forest">
           <h3>Modelo Clásico (<code>2_modelo_clasico.py</code>)</h3>
           <ul class="bullet-list">
-            <li>Algoritmo: <strong>Árbol de Decisión</strong> (<code>DecisionTreeClassifier</code>).</li>
-            <li>Ventaja: Maneja datos tabulares mixtos sin requerir gran volumen de ejemplos.</li>
-            <li>Interpretabilidad directa de reglas de decisión por producto.</li>
+            <li>Algoritmo: <strong>Árbol de Decisión podado</strong> (<code>max_depth=5</code>).</li>
+            <li>Evita memorizar ruido y maximiza generalización en datos tabulares.</li>
+            <li>Interpretabilidad directa con reglas basadas en <code>Review Rating</code>, <code>Age</code> y <code>Purchase Amount</code>.</li>
             <li>Serializado en <code>modelo_clasico.joblib</code>.</li>
           </ul>
         </div>
@@ -493,12 +529,12 @@
     </div>
     <div class="slide-footer">
       <span>2_modelo_clasico.py &amp; 3_red_neuronal.py</span>
-      <span>04 / 07</span>
+      <span>05 / 08</span>
     </div>
   </section>
 
-  <!-- SLIDE 5: COMPARACIÓN DE RESULTADOS -->
-  <section class="slide" id="slide-4">
+  <!-- SLIDE 6: COMPARACIÓN DE RESULTADOS -->
+  <section class="slide" id="slide-5">
     <div class="slide-content">
       <div class="eyebrow">04 · Script 4: 4_comparacion.py</div>
       <h2>Resultados Comparativos (780 Muestras Test)</h2>
@@ -536,6 +572,12 @@
             <td class="winner">0.3372 (33.72%)</td>
             <td><span class="badge badge-accent">Red Neuronal</span></td>
           </tr>
+          <tr>
+            <td><strong>Latencia Inferencia</strong></td>
+            <td class="winner">~50 ms (4x más rápido)</td>
+            <td>~200 ms</td>
+            <td><span class="badge badge-forest">Árbol de Decisión</span></td>
+          </tr>
         </tbody>
       </table>
       <p style="margin-top: var(--content-gap); font-size: var(--small-size);">
@@ -544,12 +586,12 @@
     </div>
     <div class="slide-footer">
       <span>4_comparacion.py</span>
-      <span>05 / 07</span>
+      <span>06 / 08</span>
     </div>
   </section>
 
-  <!-- SLIDE 6: ANÁLISIS TÉCNICO Y OVERFITTING -->
-  <section class="slide" id="slide-5">
+  <!-- SLIDE 7: ANÁLISIS TÉCNICO Y OVERFITTING -->
+  <section class="slide" id="slide-6">
     <div class="slide-content">
       <div class="eyebrow">05 · Análisis Técnico de Métricas</div>
       <h2>¿Por qué ganó el Árbol de Decisión?</h2>
@@ -572,12 +614,12 @@
     </div>
     <div class="slide-footer">
       <span>Análisis de Desempeño</span>
-      <span>06 / 07</span>
+      <span>07 / 08</span>
     </div>
   </section>
 
-  <!-- SLIDE 7: CONCLUSIÓN Y DEMO EN VIVO -->
-  <section class="slide" id="slide-6">
+  <!-- SLIDE 8: CONCLUSIÓN Y DEMO EN VIVO -->
+  <section class="slide" id="slide-7">
     <div class="slide-content">
       <div class="eyebrow">06 · Conclusión Técnica y Demostración</div>
       <h2>Conclusión y Ejecución en Vivo</h2>
@@ -592,7 +634,7 @@
     </div>
     <div class="slide-footer">
       <span>Sustentación Oral — Fin</span>
-      <span>07 / 07</span>
+      <span>08 / 08</span>
     </div>
   </section>
 
