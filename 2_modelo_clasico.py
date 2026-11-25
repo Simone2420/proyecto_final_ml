@@ -14,11 +14,11 @@ from sklearn.metrics import (
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def obtener_directorio_datos():
-    for carpeta in ["data", "datos"]:
+    for carpeta in ["datos", "data"]:
         ruta = os.path.join(BASE_DIR, carpeta)
         if os.path.exists(os.path.join(ruta, "X_train.csv")):
             return ruta
-    return os.path.join(BASE_DIR, "data")
+    return os.path.join(BASE_DIR, "datos")
 
 DATOS_DIR = obtener_directorio_datos()
 RUTA_MODELO = os.path.join(BASE_DIR, "modelo_clasico.joblib")

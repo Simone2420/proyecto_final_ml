@@ -8,8 +8,8 @@ from sklearn.preprocessing import LabelEncoder
 # Fijar semilla para reproducibilidad
 tf.random.set_seed(412)
 
-# 1. Cargar los conjuntos preprocesados desde la carpeta data/
-ruta_datos = os.path.join(os.path.dirname(__file__), "data")
+# 1. Cargar los conjuntos preprocesados desde la carpeta datos/
+ruta_datos = os.path.join(os.path.dirname(__file__), "datos")
 X_train = pd.read_csv(os.path.join(ruta_datos, "X_train.csv"))
 X_test = pd.read_csv(os.path.join(ruta_datos, "X_test.csv"))
 y_train = pd.read_csv(os.path.join(ruta_datos, "y_train.csv"))["Category"]

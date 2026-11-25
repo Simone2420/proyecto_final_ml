@@ -466,7 +466,7 @@
       </div>
     </div>
     <div class="slide-footer">
-      <span>data/shopping_trends.csv</span>
+      <span>datos/shopping_trends.csv</span>
       <span>03 / 08</span>
     </div>
   </section>
@@ -551,25 +551,25 @@
           <tr>
             <td><strong>Accuracy</strong></td>
             <td class="winner">0.4346 (43.46%)</td>
-            <td>0.3500 (35.00%)</td>
+            <td>0.3551 (35.51%)</td>
             <td><span class="badge badge-forest">Árbol de Decisión</span></td>
           </tr>
           <tr>
             <td><strong>Precision</strong></td>
             <td>0.3135 (31.35%)</td>
-            <td class="winner">0.3265 (32.65%)</td>
+            <td class="winner">0.3158 (31.58%)</td>
             <td><span class="badge badge-accent">Red Neuronal</span></td>
           </tr>
           <tr>
             <td><strong>Recall</strong></td>
             <td class="winner">0.4346 (43.46%)</td>
-            <td>0.3500 (35.00%)</td>
+            <td>0.3551 (35.51%)</td>
             <td><span class="badge badge-forest">Árbol de Decisión</span></td>
           </tr>
           <tr>
             <td><strong>F1-Score</strong></td>
             <td>0.3125 (31.25%)</td>
-            <td class="winner">0.3372 (33.72%)</td>
+            <td class="winner">0.3304 (33.04%)</td>
             <td><span class="badge badge-accent">Red Neuronal</span></td>
           </tr>
           <tr>
@@ -599,7 +599,7 @@
         <div class="card card-accent">
           <h3>Sobreajuste en la Red Neuronal</h3>
           <ul class="bullet-list">
-            <li>En entrenamiento alcanzó <strong>89.10%</strong> de Accuracy, pero cayó a <strong>35.00%</strong> en prueba (<code>Loss: 2.0561</code>).</li>
+            <li>En entrenamiento alcanzó <strong>89.74%</strong> de Accuracy, pero cayó a <strong>35.51%</strong> en prueba (<code>Loss: 2.1506</code>).</li>
             <li>Causa: Alta dimensionalidad tras One-Hot Encoding (<strong>112 columnas</strong>, principalmente por 50 estados en <code>Location</code>) con solo 3,120 filas de entrenamiento.</li>
           </ul>
         </div>
@@ -628,7 +628,7 @@
       </div>
       <div class="terminal-box">
         <div><span class="comment"># Ejecución en vivo desde la terminal del proyecto</span></div>
-        <div><span class="prompt">$</span> .venv/bin/python 4_comparacion.py</div>
+        <div><span class="prompt">&gt;</span> .venv\Scripts\python.exe 4_comparacion.py</div>
         <div style="color:#9CA3AF; margin-top:0.35rem;">→ Carga X_test.csv (780 muestras) | Evalúa ambos modelos | Imprime tabla comparativa</div>
       </div>
     </div>

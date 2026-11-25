@@ -4,8 +4,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
-# 1. Cargar el dataset original desde la carpeta data/
-ruta_datos = os.path.join(os.path.dirname(__file__), "data")
+# 1. Cargar el dataset original desde la carpeta datos/
+ruta_datos = os.path.join(os.path.dirname(__file__), "datos")
 df = pd.read_csv(os.path.join(ruta_datos, "shopping_trends.csv"))
 
 print(f"Dataset cargado: {df.shape[0]} filas y {df.shape[1]} columnas")
@@ -51,7 +51,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X_procesado, y, test_size=0.2, random_state=412, stratify=y
 )
 
-# 7. Exportar los cuatro archivos procesados a data/
+# 7. Exportar los cuatro archivos procesados a datos/
 X_train.to_csv(os.path.join(ruta_datos, "X_train.csv"), index=False)
 X_test.to_csv(os.path.join(ruta_datos, "X_test.csv"), index=False)
 y_train.to_frame(name="Category").to_csv(os.path.join(ruta_datos, "y_train.csv"), index=False)

@@ -21,7 +21,7 @@
 ---
 
 ## 📊 Descripción del Dataset
-- **Fuente:** `shopping_trends.csv` (ubicado en `data/`).
+- **Fuente:** `shopping_trends.csv` (ubicado en `datos/`).
 - **Registros:** 3,900 observaciones (cumple el rango exigido de 1,000 a 5,000).
 - **Variables de entrada ($X$):** 14 variables de entrada seleccionadas tras limpieza (edad, monto de compra, compras previas, calificación de reseñas, temporada, suscripción, método de envío, etc.), expandidas a 112 características mediante One-Hot Encoding.
 - **Variable objetivo ($y$):** `Category` (Clasificación Multiclase con 4 categorías: `Clothing`, `Accessories`, `Footwear`, `Outerwear`).
@@ -31,7 +31,7 @@
 ## 📁 Estructura del Repositorio
 ```text
 proyecto_final_ml/
-├── data/                         # Conjunto de datos crudo y particiones procesadas
+├── datos/                        # Conjunto de datos crudo y particiones procesadas
 │   ├── shopping_trends.csv       # Dataset original crudo (3,900 filas, 19 columnas)
 │   ├── X_train.csv               # 80% entrenamiento (3,120 filas, 112 columnas)
 │   ├── X_test.csv                # 20% prueba (780 filas, 112 columnas)
@@ -88,10 +88,10 @@ python 4_comparacion.py
 
 | Métrica | Árbol de Decisión (Scikit-Learn) | Red Neuronal (TensorFlow/Keras) | Modelo Superior |
 | :--- | :---: | :---: | :---: |
-| **Accuracy (Exactitud)** | **0.4346 (43.46%)** | 0.3500 (35.00%) | 🌲 **Árbol de Decisión** (+8.46%) |
-| **Precision (Ponderada)** | 0.3135 | **0.3265** | 🧠 **Red Neuronal** |
-| **Recall (Sensibilidad)** | **0.4346** | 0.3500 | 🌲 **Árbol de Decisión** |
-| **F1-Score (Ponderado)** | 0.3125 | **0.3372** | 🧠 **Red Neuronal** |
+| **Accuracy (Exactitud)** | **0.4346 (43.46%)** | 0.3551 (35.51%) | 🌲 **Árbol de Decisión** (+7.95%) |
+| **Precision (Ponderada)** | 0.3135 | **0.3158** | 🧠 **Red Neuronal** |
+| **Recall (Sensibilidad)** | **0.4346** | 0.3551 | 🌲 **Árbol de Decisión** |
+| **F1-Score (Ponderado)** | 0.3125 | **0.3304** | 🧠 **Red Neuronal** |
 | **Latencia Inferencia** | **~50 ms** | ~200 ms | 🌲 **Árbol de Decisión** (4x más rápido) |
 
 ---
