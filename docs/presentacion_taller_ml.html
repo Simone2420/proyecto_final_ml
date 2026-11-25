@@ -365,7 +365,7 @@
       <h1>Predicción de Categoría de Producto en Retail</h1>
       <p class="lead">Comparativa de pipeline modular entre Scikit-Learn (Árbol de Decisión) y TensorFlow/Keras (Red Neuronal Secuencial).</p>
       <div class="quote-box">
-        <p>“¿Qué categoría de producto (<strong>Clothing</strong>, <strong>Footwear</strong>, <strong>Accessories</strong>, <strong>Outerwear</strong>) comprará un cliente según su perfil y temporada?”</p>
+        <p>“¿Qué categoría de producto (<strong>Clothing</strong> (Ropa), <strong>Footwear</strong> (Calzado), <strong>Accessories</strong> (Accesorios), <strong>Outerwear</strong> (Abrigos)) comprará un cliente según su perfil y temporada?”</p>
       </div>
       <div class="grid-3">
         <div class="card">
@@ -397,7 +397,7 @@
         <div class="card card-accent">
           <h3>1. Pregunta Central (Estacionalidad)</h3>
           <p style="color:var(--ink); font-weight:500; margin-bottom:0.6rem;">
-            “¿Qué categoría de producto (<code>Clothing</code>, <code>Footwear</code>, <code>Accessories</code>, <code>Outerwear</code>) comprará un cliente según su perfil y temporada?”
+            “¿Qué categoría de producto (<code>Clothing</code> (Ropa), <code>Footwear</code> (Calzado), <code>Accessories</code> (Accesorios), <code>Outerwear</code> (Abrigos)) comprará un cliente según su perfil y temporada?”
           </p>
           <ul class="bullet-list">
             <li>Personalizar ofertas en tienda física y e-commerce.</li>
@@ -407,11 +407,11 @@
         <div class="card card-forest">
           <h3>2. Sensibilidad al Valor y Frecuencia</h3>
           <p style="color:var(--ink); font-weight:500; margin-bottom:0.6rem;">
-            “¿Existe correlación entre monto (<code>USD</code>), frecuencia de compra y adquirir <code>Accessories</code> vs. <code>Clothing</code>?”
+            “¿Existe correlación entre monto (<code>USD</code>), frecuencia de compra y adquirir <code>Accessories</code> (Accesorios) vs. <code>Clothing</code> (Ropa)?”
           </p>
           <ul class="bullet-list">
             <li>Gasto promedio idéntico (~$60 USD): sin correlación lineal aislada.</li>
-            <li>Relación no lineal: <code>Review Rating</code> (18.36%), <code>Purchase Amount</code> (10.24%) y frecuencia semanal (6.05%).</li>
+            <li>Relación no lineal: <code>Review Rating</code> (Calificación, 18.36%), <code>Purchase Amount</code> (Monto, 10.24%) y frecuencia semanal (6.05%).</li>
             <li>Estrategia: <em>cross-selling</em> de accesorios en visitas frecuentes.</li>
           </ul>
         </div>
@@ -450,17 +450,17 @@
         <div class="card card-accent">
           <h3>Variables Predictoras (Mixtas)</h3>
           <ul class="bullet-list">
-            <li><strong>Numéricas:</strong> <code>Age</code>, <code>Purchase Amount (USD)</code>, <code>Review Rating</code>, <code>Previous Purchases</code>.</li>
-            <li><strong>Categóricas (string):</strong> <code>Gender</code>, <code>Location</code>, <code>Size</code>, <code>Color</code>, <code>Season</code>, <code>Payment Method</code>, <code>Shipping Type</code>, <code>Subscription Status</code>.</li>
+            <li><strong>Numéricas:</strong> <code>Age</code> (Edad), <code>Purchase Amount</code> (Monto), <code>Review Rating</code> (Calificación), <code>Previous Purchases</code> (Compras Previas).</li>
+            <li><strong>Categóricas (string):</strong> <code>Gender</code> (Género), <code>Location</code> (Ubicación), <code>Size</code> (Talla), <code>Color</code>, <code>Season</code> (Temporada), <code>Payment Method</code> (Método de Pago), <code>Shipping Type</code> (Envío), <code>Subscription Status</code> (Suscripción).</li>
           </ul>
         </div>
         <div class="card card-forest">
-          <h3>Variable Objetivo: <code>Category</code></h3>
+          <h3>Variable Objetivo: <code>Category</code> (Categoría)</h3>
           <ul class="bullet-list">
-            <li><strong>Clothing:</strong> 1,737 registros (44.5%)</li>
-            <li><strong>Accessories:</strong> 1,240 registros (31.8%)</li>
-            <li><strong>Footwear:</strong> 599 registros (15.4%)</li>
-            <li><strong>Outerwear:</strong> 324 registros (8.3%)</li>
+            <li><strong>Clothing (Ropa):</strong> 1,737 registros (44.5%)</li>
+            <li><strong>Accessories (Accesorios):</strong> 1,240 registros (31.8%)</li>
+            <li><strong>Footwear (Calzado):</strong> 599 registros (15.4%)</li>
+            <li><strong>Outerwear (Abrigos):</strong> 324 registros (8.3%)</li>
           </ul>
         </div>
       </div>
@@ -480,7 +480,7 @@
         <div class="card">
           <h3>Limpieza e Imputación</h3>
           <ul class="bullet-list">
-            <li>Se excluyó <code>Customer ID</code> e <code>Item Purchased</code> para evitar fuga de datos (<em>data leakage</em>).</li>
+            <li>Se excluyó <code>Customer ID</code> (ID de Cliente) e <code>Item Purchased</code> (Artículo Comprado) para evitar fuga de datos.</li>
             <li>Inyección controlada de <strong>3.49% de nulos</strong> (semilla <code>412</code>) en 8 columnas clave.</li>
             <li><code>SimpleImputer</code>: <strong>mediana</strong> para numéricas y <strong>moda</strong> para categóricas.</li>
           </ul>
@@ -512,7 +512,7 @@
           <ul class="bullet-list">
             <li>Algoritmo: <strong>Árbol de Decisión podado</strong> (<code>max_depth=5</code>).</li>
             <li>Evita memorizar ruido y maximiza generalización en datos tabulares.</li>
-            <li>Interpretabilidad directa con reglas basadas en <code>Review Rating</code>, <code>Age</code> y <code>Purchase Amount</code>.</li>
+            <li>Interpretabilidad directa con reglas basadas en <code>Review Rating</code> (Calificación), <code>Age</code> (Edad) y <code>Purchase Amount</code> (Monto).</li>
             <li>Serializado en <code>modelo_clasico.joblib</code>.</li>
           </ul>
         </div>
